@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "lib": [
+      "esnext"
+    ],
+    "sourceMap": true,
+    "module": "commonjs",
+    "outDir": "dist-lib",
+    "declaration": true,
+    "strict": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true
+  },
+  "include": [
+    "./lib/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "test"
+  ],
+  "typedocOptions": {
+    "name": "soNetReborn",
+    "mode": "file",
+    "out": "docs-lib",
+    "theme": "./node_modules/typedoc-clarity-theme",
+    "ignoreCompilerErrors": true,
+    "excludePrivate": true,
+    "excludeExternals": true,
+    "excludeNotExported": true,
+    "target": "es2017",
+    "moduleResolution": "node",
+    "preserveConstEnums": true,
+    "stripInternal": true,
+    "suppressExcessPropertyErrors": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "module": "commonjs",
+    "includes": "./docs-full/"
+  }
+}
