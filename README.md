@@ -1,2 +1,2 @@
 ### Sonet
-Pls refer to [this](https://sonyahon.github.io/sonet-ts/globals.html)
+Pls refer to [this](https://SonyaHon.github.io/sonet-ts/index.html)

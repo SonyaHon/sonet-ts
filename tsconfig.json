@@ -23,7 +23,7 @@
   "typedocOptions": {
     "name": "soNetReborn",
     "mode": "file",
-    "out": "docs-lib",
+    "out": "docs",
     "theme": "./node_modules/typedoc-clarity-theme",
     "ignoreCompilerErrors": true,
     "excludePrivate": true,
