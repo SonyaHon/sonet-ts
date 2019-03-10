@@ -2,7 +2,7 @@
   "name": "sonetts",
   "version": "0.0.1",
   "description": "so net project",
-  "main": "dist/index.js",
+  "main": "dist-lib/index.js",
   "scripts": {
     "_buid-lib": "./node_modules/.bin/tsc",
     "_build-docs": "./node_modules/.bin/typedoc"

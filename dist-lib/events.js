@@ -105,18 +105,18 @@ class Events {
      */
     async fire(eventName, ...args) {
         let nextArgs = args;
-        for (const key of this.middlewaresBeforeCallbackExecution) {
+        for (const key in this.middlewaresBeforeCallbackExecution) {
             const r = await this.middlewaresBeforeCallbackExecution[key](eventName, nextArgs);
             if (r && r.preventNext) {
-                return r;
+                return r.result;
             }
             else {
                 nextArgs = r;
             }
         }
         let res = [];
-        for (const key of this.callbacks[eventName]) {
-            res.push(await this.callbacks[eventName][key](...args));
+        for (const key in this.callbacks[eventName]) {
+            res.push(await this.callbacks[eventName][key](...nextArgs));
         }
         if (res.length === 0) {
             res = undefined;
@@ -125,10 +125,10 @@ class Events {
             res = res[0];
         }
         let initial = args;
-        for (const key of this.middlewaresAfterCallbackExecution) {
+        for (const key in this.middlewaresAfterCallbackExecution) {
             const r = await this.middlewaresAfterCallbackExecution[key](eventName, initial, nextArgs, res);
             if (r && r.preventNext) {
-                return r;
+                return r.result;
             }
             else {
                 initial = res;

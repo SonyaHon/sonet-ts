@@ -22,14 +22,24 @@ export declare class WebapiServer extends Events {
     private incomingPacketAfterMIddlewares;
     private outcomingPacketBeforeMiddlewares;
     private outcomingPacketAfterMIddlewares;
+    private onConnect;
+    private onDisconnect;
     private connectedSockets;
     constructor(options: IWebapiServerOptions);
+    useInc(middleware: Function, after?: boolean): string;
+    useOut(middleware: Function, after?: boolean): string;
+    unUse(id: string): void;
+    setOnConnect(handler: Function): void;
+    unsetOnConnect(): void;
+    setOnDisconnect(handler: Function): void;
+    unsetOnDisconnect(): void;
     getApp(): any;
     listen(): Promise<void>;
     fire(socketId: string, eventName: string, ...args: any): Promise<any>;
     broadcast(eventName: string, ...args: any): void;
     private connectionHandler;
     private disconnectHandler;
-    private incomingMiddleware;
-    private outcomingMiddleware;
+    private incommingMiddleware;
+    private incommingMiddlewareAfter;
+    private outcommingMiddleware;
 }

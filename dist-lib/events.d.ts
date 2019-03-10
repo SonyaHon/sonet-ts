@@ -25,7 +25,7 @@ export declare class Events {
      * @param after if its before middleware or after middleware
      * @returns uuid of appended middleware
      */
-    use(middleware: MWFunctionBefore | MWFunctionAfter, after?: true): string;
+    use(middleware: Function, after?: true): string;
     /**
      * Deletes middleware from Events instance if id is not provided, deletes all middlewares
      * @param id what to delete

@@ -1,9 +1,7 @@
 import { Events } from "./events";
 export declare enum EPacketType {
-    INCOMING = 0,
-    OUTCOMING = 1,
-    INCOMING_RETURN = 2,
-    OUTCOMING_RETURN = 3
+    SERVER = 0,
+    CLIENT = 1
 }
 export interface ISocket extends Events {
     getId: Function;
@@ -13,6 +11,7 @@ export interface ISocket extends Events {
 }
 export interface IPacket {
     $$packet: true;
+    $$from: string;
     type: EPacketType;
     id: string;
     data: {

@@ -38,7 +38,7 @@ export class Events {
      * @param after if its before middleware or after middleware
      * @returns uuid of appended middleware
      */
-    public use(middleware: MWFunctionBefore | MWFunctionAfter, after?: true): string {
+    public use(middleware: Function, after?: true): string {
         const id: string = uuid();
         if (after) {
             this.middlewaresAfterCallbackExecution[id] = middleware;
@@ -118,17 +118,17 @@ export class Events {
      */
     public async fire(eventName: string, ...args: any): Promise<any> {
         let nextArgs: any[] = args;
-        for (const key of this.middlewaresBeforeCallbackExecution) {
+        for (const key in this.middlewaresBeforeCallbackExecution) {
             const r = await this.middlewaresBeforeCallbackExecution[key](eventName, nextArgs);
             if (r && r.preventNext) {
-                return r;
+                return r.result;
             } else {
                 nextArgs = r;
             }
         }
         let res: any[] | any = [];
-        for (const key of this.callbacks[eventName]) {
-            res.push(await this.callbacks[eventName][key](...args));
+        for (const key in this.callbacks[eventName]) {
+            res.push(await this.callbacks[eventName][key](...nextArgs));
         }
         if (res.length === 0) {
             res = undefined;
@@ -136,10 +136,10 @@ export class Events {
             res = res[0];
         }
         let initial: any[] = args;
-        for (const key of this.middlewaresAfterCallbackExecution) {
+        for (const key in this.middlewaresAfterCallbackExecution) {
             const r =  await this.middlewaresAfterCallbackExecution[key](eventName, initial, nextArgs, res);
             if (r && r.preventNext) {
-                return r;
+                return r.result;
             } else {
                 initial = res;
             }
